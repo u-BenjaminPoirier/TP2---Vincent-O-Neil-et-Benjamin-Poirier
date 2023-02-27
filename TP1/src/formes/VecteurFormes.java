@@ -3,9 +3,12 @@ package formes;
 import java.util.ArrayList;
 
 public class VecteurFormes implements IVecteurFormes{
+
+    ArrayList<Forme> Vecteur;
+
     @Override
     public ArrayList<Forme> getVecteur() {
-        return null;
+        return Vecteur;
     }
 
     @Override

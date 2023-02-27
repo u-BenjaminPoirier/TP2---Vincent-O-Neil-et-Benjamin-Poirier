@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Forme</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">formes</a>
+</div>
+
+<h1>Coverage Summary for Class: Forme (formes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Forme</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78,9%
+  </span>
+  <span class="absValue">
+    (30/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package formes;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import static formes.Couleur.*;
+&nbsp;
+&nbsp;public abstract class Forme {
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public final static Couleur COULEUR_DEFAULT = ROUGE;</b>
+&nbsp;
+&nbsp;    public final static int MAX_VAL = 30;
+&nbsp;    public final static int MIN_VAL = 1;
+&nbsp;    private String nom;
+&nbsp;    private String couleur;
+&nbsp;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    /***</b>
+<b class="fc">&nbsp;     * Constructeur de la forme, crée la forme</b>
+&nbsp;     * @param nom nom de la forme
+&nbsp;     */
+<b class="fc">&nbsp;    public Forme(String nom) {</b>
+<b class="fc">&nbsp;        this.nom = nom;</b>
+<b class="fc">&nbsp;        setCouleur(COULEUR_DEFAULT);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Methode qui calcule le perimetre de la forme
+<b class="fc">&nbsp;     * @return le perimetre de la forme</b>
+&nbsp;     */
+&nbsp;    public abstract int calculerPerimetre();
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Methode qui calculer la surface de la forme
+&nbsp;     * @return la surface de la forme
+<b class="fc">&nbsp;     */</b>
+&nbsp;    public abstract int calculerSurface();
+&nbsp;
+<b class="fc">&nbsp;    //nom</b>
+&nbsp;
+&nbsp;    /***
+&nbsp;     *Accesseur du nom
+&nbsp;     * @return le nom de la forme
+&nbsp;     */
+&nbsp;    public String getNom() {
+<b class="fc">&nbsp;        return nom;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;
+&nbsp;    //Couleur
+<b class="fc">&nbsp;</b>
+&nbsp;    /***
+<b class="fc">&nbsp;     * Setter de la couleur</b>
+<b class="fc">&nbsp;     * @param couleur Couleur de la forme</b>
+<b class="nc">&nbsp;     */</b>
+&nbsp;    public void setCouleur(Couleur couleur) {
+<b class="fc">&nbsp;        this.couleur = couleur.getNom();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Accesseur de la couleur
+<b class="nc">&nbsp;     * @return la couleur de la forme</b>
+<b class="nc">&nbsp;     */</b>
+&nbsp;    public String getCouleur() {
+<b class="fc">&nbsp;        return couleur;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    /***</b>
+<b class="nc">&nbsp;     * ToString de la forme</b>
+<b class="nc">&nbsp;     * @return La forme en string</b>
+<b class="nc">&nbsp;     */</b>
+&nbsp;    public abstract String toString();
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Methode qui compare deux formes via leurs nom et couleurs
+&nbsp;     * @param forme forme qui sera compare
+&nbsp;     * @return Le nombre qui explique la position des deux formes l&#39;un a l&#39;autre lexicographiquement
+&nbsp;     */
+&nbsp;
+&nbsp;    public int compareTo(Forme forme) {
+<b class="fc">&nbsp;        String nom = this.getNom();</b>
+<b class="fc">&nbsp;        int nb = nom.compareTo(forme.getNom());</b>
+<b class="fc">&nbsp;        if (nb == 0)</b>
+<b class="fc">&nbsp;            return this.getCouleur().compareTo(forme.getCouleur());</b>
+<b class="fc">&nbsp;        else return nb;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Methode qui verifie si deux formes sont egales selon leur nom, couleur et surface
+&nbsp;     * @param o forme qui sera compare a l&#39;instance
+&nbsp;     * @return Si la forme est egale ou non a l&#39;instance
+&nbsp;     */
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc">&nbsp;        Forme forme = (Forme) o;</b>
+<b class="fc">&nbsp;        if (!Objects.equals(nom, forme.nom)) return false;</b>
+<b class="fc">&nbsp;        else if (!Objects.equals(this.getCouleur(), forme.getCouleur())) return false;</b>
+<b class="fc">&nbsp;        else return this.calculerSurface() == forme.calculerSurface();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-16 22:14</div>
+</div>
+</body>
+</html>

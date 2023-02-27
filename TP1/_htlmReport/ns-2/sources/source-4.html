@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Rectangle</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">formes</a>
+</div>
+
+<h1>Coverage Summary for Class: Rectangle (formes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Rectangle</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72,2%
+  </span>
+  <span class="absValue">
+    (13/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package formes;
+&nbsp;
+&nbsp;import exceptions.FormeException;
+&nbsp;
+&nbsp;public class Rectangle extends Forme {
+&nbsp;    private int hauteur;
+&nbsp;    private int largeur;
+&nbsp;
+&nbsp;    public Rectangle(int largeur, int hauteur) {
+<b class="fc">&nbsp;        super(&quot;Rectangle&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (largeurEstValide(largeur)) {</b>
+<b class="fc">&nbsp;            setLargeur(largeur);</b>
+<b class="nc">&nbsp;        } else throw new FormeException(&quot;Largeur est invalide&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (hauteurEstValide(hauteur)) {</b>
+<b class="fc">&nbsp;            setHauteur(hauteur);</b>
+<b class="nc">&nbsp;        } else throw new FormeException(&quot;Hauteur est invalide&quot;);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public int calculerPerimetre() {
+&nbsp;        int perimetre;
+&nbsp;
+<b class="fc">&nbsp;        perimetre = (2 * largeur) + (2 * hauteur);</b>
+&nbsp;
+<b class="fc">&nbsp;        return perimetre;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int calculerSurface() {
+&nbsp;        int Surface;
+&nbsp;
+<b class="fc">&nbsp;        Surface = largeur * hauteur;</b>
+&nbsp;
+<b class="fc">&nbsp;        return Surface;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static boolean hauteurEstValide(int hauteur) {return hauteur &lt;= Forme.MAX_VAL &amp;&amp; hauteur &gt;= Forme.MIN_VAL;}</b>
+&nbsp;
+&nbsp;    public static boolean largeurEstValide(int Largeur) {
+<b class="fc">&nbsp;        return Largeur &lt;= Forme.MAX_VAL &amp;&amp; Largeur &gt;= Forme.MIN_VAL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getHauteur() {
+<b class="nc">&nbsp;        return hauteur;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getLargeur() {
+<b class="nc">&nbsp;        return largeur;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHauteur(int hauteur) {
+<b class="fc">&nbsp;        this.hauteur = hauteur;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLargeur(int largeur) {
+<b class="fc">&nbsp;        this.largeur = largeur;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return getNom() + &quot; &quot; + getCouleur() + &quot;(où &quot; + hauteur + &quot; est la hauteur et &quot; + largeur + &quot; est la largeur)&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-16 22:14</div>
+</div>
+</body>
+</html>

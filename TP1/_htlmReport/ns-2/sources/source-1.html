@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Cercle</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">formes</a>
+</div>
+
+<h1>Coverage Summary for Class: Cercle (formes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Cercle</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71,4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (9/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package formes;
+&nbsp;
+&nbsp;import exceptions.FormeException;
+&nbsp;
+&nbsp;public class Cercle extends Forme {
+&nbsp;
+&nbsp;    int rayon;
+&nbsp;
+&nbsp;    public Cercle(int rayon) {
+<b class="fc">&nbsp;        super(&quot;Cercle&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (rayonEstValide(rayon)) {</b>
+<b class="fc">&nbsp;            setRayon(rayon);</b>
+<b class="nc">&nbsp;        } else throw new FormeException(&quot;Rayon est invalide&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int calculerPerimetre() {
+&nbsp;        int perimetre;
+&nbsp;
+<b class="fc">&nbsp;        perimetre = (int) (2 * Math.PI * rayon);</b>
+&nbsp;
+<b class="fc">&nbsp;        return perimetre;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public int calculerSurface() {
+&nbsp;        int Surface;
+&nbsp;
+<b class="fc">&nbsp;        Surface = (int) ( Math.PI * rayon * rayon);</b>
+&nbsp;
+<b class="fc">&nbsp;        return Surface;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean rayonEstValide(int rayon) {
+<b class="fc">&nbsp;        return rayon &lt; MAX_VAL &amp;&amp; rayon &gt; MIN_VAL;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getRayon() {
+<b class="nc">&nbsp;        return rayon;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRayon(int rayon) {
+<b class="fc">&nbsp;        this.rayon = rayon;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return getNom() + &quot; &quot; + getCouleur() + &quot;(où &quot; + rayon + &quot; est le rayon)&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-16 22:14</div>
+</div>
+</body>
+</html>

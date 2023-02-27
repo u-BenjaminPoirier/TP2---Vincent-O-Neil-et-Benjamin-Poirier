@@ -25,4 +25,22 @@ public class VecteurFormes implements IVecteurFormes{
     public void melanger() {
 
     }
+
+    private void addForme(Forme forme, Couleur c){
+
+    }
+
+    private void permuter (int forme1, int forme2){
+
+    }
+
+    public String toString(){
+
+    }
+
+    private boolean validerNbrFormes(int nbrForme){
+
+    }
+
+
 }

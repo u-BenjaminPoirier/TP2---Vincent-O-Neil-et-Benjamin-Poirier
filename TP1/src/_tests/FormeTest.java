@@ -10,7 +10,7 @@ import formes.Triangle;
 import java.util.Objects;
 import java.util.function.DoubleUnaryOperator;
 
-class FormeTest {
+class jFormeTest {
 
     @Test
     void getNom() {

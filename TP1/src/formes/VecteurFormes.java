@@ -12,6 +12,7 @@ public class VecteurFormes implements IVecteurFormes {
 
     /**
      * Arraylist qui nous permet de contenir le nombre de formes voulues
+     *
      * @Vecteur
      */
     @Override
@@ -21,11 +22,12 @@ public class VecteurFormes implements IVecteurFormes {
 
     /**
      * Méthode qui nous permet de remplir le vecteur de forme selon le nombre de fois voulues
+     *
      * @param nbrElements le nombre de formes voulues
      */
 
-    public void remplir(int nbrElements){
-        if(!(validerNbrFormes(nbrElements))){
+    public void remplir(int nbrElements) {
+        if (!(validerNbrFormes(nbrElements))) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -57,12 +59,13 @@ public class VecteurFormes implements IVecteurFormes {
             }
         }
     }
+
     @Override
     public void trier() {
         for (int i = 0; i < Vecteur.size(); i++) {
-            for (int j = 0; j < Vecteur.size() ; j++) {
-                if (0 < Vecteur.get(j).compareTo(Vecteur.get(j + 1)){
-                    permuter(j,j+1);
+            for (int j = 0; j < Vecteur.size(); j++) {
+                if (0 < Vecteur.get(j).compareTo(Vecteur.get(j + 1)) {
+                    permuter(j, j + 1);
                 }
             }
         }
@@ -93,8 +96,8 @@ public class VecteurFormes implements IVecteurFormes {
         Forme o1;
         Forme o2;
 
-         o1 = Vecteur.get(index1);
-         o2 = Vecteur.get(index2);
+        o1 = Vecteur.get(index1);
+        o2 = Vecteur.get(index2);
 
         Vecteur.remove(index1);
         Vecteur.add(index1, o2);
@@ -107,7 +110,7 @@ public class VecteurFormes implements IVecteurFormes {
         StringBuilder str = new StringBuilder();
         int i = 0;
 
-        while (i<Vecteur.size()){
+        while (i < Vecteur.size()) {
             str.append(Vecteur.get(i).toStringCourt()).append("\n");
             i++;
         }
@@ -116,10 +119,6 @@ public class VecteurFormes implements IVecteurFormes {
     }
 
     private boolean validerNbrFormes(int nbrForme) {
-        if (nbrForme <= 0){
-            throw new ArrayIndexOutOfBoundsException();
-        }
-    }
-
-
+        return nbrForme > 0;
+    }   
 }

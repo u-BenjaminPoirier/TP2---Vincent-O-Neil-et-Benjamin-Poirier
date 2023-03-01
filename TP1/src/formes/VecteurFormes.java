@@ -1,6 +1,8 @@
 package formes;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import static formes.Couleur.*;
 
@@ -55,8 +57,19 @@ public class VecteurFormes implements IVecteurFormes {
 
     @Override
     public void melanger() {
+        int i = 0;
+        Forme o;
 
+        while (i < 100) {
+            int r = (int) Math.floor(Math.random() * (Vecteur.size() - 1 + 1) + 0);
+
+            o = Vecteur.get(r);
+            Vecteur.remove(r);
+            Vecteur.add(o);
+            i++;
+        }
     }
+
 
     private void addForme(Forme forme, Couleur c) {
 

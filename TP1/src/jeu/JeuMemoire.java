@@ -2,6 +2,7 @@ package jeu;
 
 import formes.*;
 import formes.IVecteurFormes;
+import formes.Rectangle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,7 +24,15 @@ public class JeuMemoire implements IJeuMemoire {
     private ArrayList<Point> VecteurPoints;
 
 
-    private String ajouterEspaces(int, String) {
+    private String ajouterEspaces(int nbEspaces, String forme) {
+        Forme r = new Rectangle(1,1);
+        int pColonne = 0;
+        for (int i = 0; i < nbEspaces; i++){
+            grilleDeJeu[pColonne][i] = r;
+            if (i + 1 % 6 == 0){
+                pColonne += 1;
+            }
+        }
 
     }
 

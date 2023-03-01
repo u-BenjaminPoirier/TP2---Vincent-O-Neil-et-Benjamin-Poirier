@@ -26,12 +26,13 @@ public class JeuMemoire implements IJeuMemoire {
 
     private String ajouterEspaces(int nbEspaces, String forme) {
         int i = 0;
-        while (i < nbEspaces){
-            for(int j = 0; j < nbEspaces; j++){
+        while (i < nbEspaces) {
+            for (int j = 0; j < nbEspaces; j++) {
                 forme += " ";
                 i++;
+            }
+            return forme;
         }
-        return forme;
     }
 
     private Point choisirForme(){
@@ -53,7 +54,8 @@ public class JeuMemoire implements IJeuMemoire {
     }
 
     @Override
-    public boolean jouerHumain(int ligne, int colonne) {
+    public boolean jouerHumain(int ligne, int colonne, Forme forme) {
+        return grilleDeJeu[ligne][colonne] == forme;
     }
 //get
 
@@ -68,7 +70,7 @@ public class JeuMemoire implements IJeuMemoire {
 
     @Override
     public int getNiveau() {
-        return 0;
+        return niveau;
     }
 
     public VecteursFormes getVecteur(){
@@ -85,7 +87,7 @@ public class JeuMemoire implements IJeuMemoire {
 
     @Override
     public String toString() {
-        return "JeuMemoire{}";
+        return ;
     }
 
     public static void main(String[] args) {

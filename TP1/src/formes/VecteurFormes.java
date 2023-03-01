@@ -10,30 +10,15 @@ public class VecteurFormes implements IVecteurFormes {
 
     ArrayList<Forme> Vecteur;
 
-    /**
-     * Arraylist qui nous permet de contenir le nombre de formes voulues
-     * @Vecteur
-     */
     @Override
     public ArrayList<Forme> getVecteur() {
         return Vecteur;
     }
 
-    /**
-     * Méthode qui nous permet de remplir le vecteur de forme selon le nombre de fois voulues
-     * @param nbrElements le nombre de formes voulues
-     * @throws ArrayIndexOutOfBoundsException
-     */
     @Override
-<<<<<<< Updated upstream
     public void remplir(int nbrElements) {
 
         if (nbrElements <= 0) {
-=======
-    public void remplir(int nbrElements) throws ArrayIndexOutOfBoundsException {
-<<<<<<< Updated upstream
-        if (nbrElements <= 0){
->>>>>>> Stashed changes
             throw new ArrayIndexOutOfBoundsException();
         }
 
@@ -64,25 +49,20 @@ public class VecteurFormes implements IVecteurFormes {
                 }
             }
         }
-<<<<<<< Updated upstream
-=======
-
-
-
-
-=======
-        if(nbrElements <= 0){
-            throw new ArrayIndexOutOfBoundsException();
-        }
-        for (int i = 0; i < nbrElements; i++){
->>>>>>> Stashed changes
-
-        }
->>>>>>> Stashed changes
     }
     @Override
     public void trier() {
+        Forme o;
 
+        for (int i = 0; i < Vecteur.size(); i++) {
+            for (int j = 0; j < Vecteur.size(); j++) {
+                if( 0 < Vecteur.get(j).compareTo(Vecteur.get(j +1))){
+                    o = Vecteur.get(i);
+                    Vecteur.set(i,Vecteur.get(i+1) );
+                    Vecteur.set(i+1, o);
+                }
+            }
+        }
     }
 
     @Override
@@ -102,18 +82,6 @@ public class VecteurFormes implements IVecteurFormes {
 
 
     private void addForme(Forme forme, Couleur c) {
-
-    }
-
-    private void permuter(int forme1, int forme2) {
-
-    }
-
-    public String toString() {
-
-    }
-
-    private boolean validerNbrFormes(int nbrForme) {
 
     }
 

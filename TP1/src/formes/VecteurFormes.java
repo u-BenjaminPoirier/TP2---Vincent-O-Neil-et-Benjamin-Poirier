@@ -120,5 +120,5 @@ public class VecteurFormes implements IVecteurFormes {
 
     private boolean validerNbrFormes(int nbrForme) {
         return nbrForme > 0;
-    }   
+    }
 }

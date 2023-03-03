@@ -1,5 +1,7 @@
 package jeu;
 
+import formes.Forme;
+
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -39,6 +41,8 @@ public interface IJeuMemoire {
      * l'ordi dans l'ordre respecté.
      */
     public boolean jouerHumain(int ligne, int colonne);
+
+    boolean jouerHumain(int ligne, int colonne, Forme forme);
 
     /**
      * Obtenir sous forme de chaîne sans espace le nom et la couleur de la forme

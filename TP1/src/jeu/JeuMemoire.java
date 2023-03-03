@@ -1,16 +1,14 @@
 package jeu;
 
 import formes.*;
-import formes.IVecteurFormes;
-import formes.Rectangle;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class JeuMemoire implements IJeuMemoire {
 
-    public final static int COLONNE = 1;
-    public final static int LIGNE = 1;
+    public final static int COLONNE = 5;
+    public final static int LIGNE = 4;
 
     private final static int  LONGUEUR_CHAINE = 1;
 
@@ -22,6 +20,11 @@ public class JeuMemoire implements IJeuMemoire {
     private VecteurFormes vecteurFormes;
 
     private ArrayList<Point> VecteurPoints;
+
+    public JeuMemoire(){
+        preparerVecteurFormes();
+        prepareGrilleDeJeu();
+    }
 
 
     private String ajouterEspaces(int nbEspaces, String forme) {
@@ -41,11 +44,22 @@ public class JeuMemoire implements IJeuMemoire {
 
 
     private void prepareGrilleDeJeu(){
+        grilleDeJeu = new Forme[COLONNE][LIGNE];
+        int index = 0;
 
+
+        for (int i = 0; i < COLONNE; i++) {
+            for (int j = 0; j < LIGNE ; j++) {
+                grilleDeJeu[i][j] = vecteurFormes.getVecteur().get(index);
+                index ++;
+            }
+        }
     }
 
     private void preparerVecteurFormes(){
-
+        vecteurFormes = new VecteurFormes();
+        vecteurFormes.remplir(20);
+        vecteurFormes.melanger();
     }
 
     @Override
@@ -57,7 +71,6 @@ public class JeuMemoire implements IJeuMemoire {
     public boolean jouerHumain(int ligne, int colonne, Forme forme) {
         return grilleDeJeu[ligne][colonne] == forme;
     }
-//get
 
     public Forme[][] getGrille(){
 
@@ -73,8 +86,8 @@ public class JeuMemoire implements IJeuMemoire {
         return niveau;
     }
 
-    public VecteursFormes getVecteur(){
-
+    public VecteurFormes getVecteur(){
+        return vecteurFormes;
     }
 
     //set
@@ -87,7 +100,7 @@ public class JeuMemoire implements IJeuMemoire {
 
     @Override
     public String toString() {
-        return ;
+        return "";
     }
 
     public static void main(String[] args) {

@@ -41,19 +41,18 @@ public class JeuMemoire implements IJeuMemoire {
 
     private Point choisirForme() {
         Point p = new Point();
-        boolean b = false;
-        while (b == false) {
+
+        for (int i = 0; i < VecteurPoints.size(); i++) {
             int nbRandomX = getNombreAleatoireEntreBorne(0, COLONNE);
             int nbRandomY = getNombreAleatoireEntreBorne(0, LIGNE);
 
-            if (!(pointSontPareilles(index, nbRandomX, nbRandomY))) {
+            if (!(pointSontPareilles(i, nbRandomX, nbRandomY))) {
                 p.setLocation(nbRandomX, nbRandomY);
                 break;
+            }else{
+                i --;
             }
-
         }
-
-
         return p;
     }
 
@@ -92,13 +91,13 @@ public class JeuMemoire implements IJeuMemoire {
      */
     @Override
     public ArrayList<Point> jouerOrdi() {
-        ArrayList<Point> vecteurP = new ArrayList<Point>();
+        VecteurPoints = new ArrayList<Point>();
 
         for (int i = 0; i < niveau + 2; i++) {
-            vecteurP.set(i, choisirForme());
+            VecteurPoints.add(choisirForme());
         }
 
-        return vecteurP;
+        return VecteurPoints;
     }
 
     public boolean pointSontPareilles(int index, int x, int y) {

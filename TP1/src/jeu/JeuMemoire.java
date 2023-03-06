@@ -90,12 +90,13 @@ public class JeuMemoire implements IJeuMemoire {
      */
     @Override
     public ArrayList<Point> jouerOrdi() {
+        ArrayList<Point> vecteurP = new ArrayList<Point>();
 
         for (int i = 0; i < niveau + 2; i++) {
-            VecteurPoints.set(i, choisirForme());
+            vecteurP.set(i, choisirForme());
         }
 
-        return VecteurPoints;
+        return vecteurP;
     }
 
     public boolean pointSontPareilles(int index, int x, int y) {
@@ -121,13 +122,14 @@ public class JeuMemoire implements IJeuMemoire {
      * l'ordi dans l'ordre respecté.
      */
 
-    public boolean jouerHumain(int ligne, int colonne, Forme forme) {
-        return grilleDeJeu[colonne][ligne].equals(forme);
-    }
+    public boolean jouerHumain(int ligne, int colonne) {
+        Point p = new Point();      
+        p.setLocation(colonne,ligne);
 
-   /* public boolean jouerHumain(int ligne, int colonne) {
-        return grilleDeJeu[colonne][ligne].equals();
-    }*/
+        VecteurPoints.add(p);
+
+        if (pointSontPareilles(lastIndexOf(VecteurFormes),))
+    }
 
     public Forme[][] getGrille() {
         return grilleDeJeu;
@@ -161,7 +163,7 @@ public class JeuMemoire implements IJeuMemoire {
 
         for (int i = 0; i < LIGNE; i++) {
             for (int j = 0; j < COLONNE; j++) {
-                str.append(ajouterEspaces(17,grilleDeJeu[j][i].toStringCourt()));
+                str.append(ajouterEspaces(17, grilleDeJeu[j][i].toStringCourt()));
             }
             str.append("\n");
         }

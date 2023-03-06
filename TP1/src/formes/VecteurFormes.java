@@ -75,7 +75,7 @@ public class VecteurFormes implements IVecteurFormes {
     public void trier() {
         for (int i = 0; i < Vecteur.size(); i++) {
             for (int j = 0; j < Vecteur.size(); j++) {
-                if (0 < Vecteur.get(j).compareTo(Vecteur.get(j + 1)) {
+                if (0 < Vecteur.get(j).compareTo(Vecteur.get(j + 1))) {
                     permuter(j, j + 1);
             }
                 }

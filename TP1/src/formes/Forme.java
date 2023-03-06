@@ -99,6 +99,6 @@ public abstract class Forme {
     }
 
     public String toStringCourt(){
-        return getNom()+ " " + getCouleur();
+        return getNom() + " " + getCouleur();
     }
 }

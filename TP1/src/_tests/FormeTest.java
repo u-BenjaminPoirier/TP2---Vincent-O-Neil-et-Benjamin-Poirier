@@ -1,15 +1,9 @@
-import formes.Couleur;
-import formes.Rectangle;
-import formes.Triangle;
-import org.junit.Test;
+import formes.*;
+import org.junit.jupiter.api.Test;
 
 import static formes.Couleur.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-import formes.Triangle;
-
-import java.util.Objects;
-import java.util.function.DoubleUnaryOperator;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class FormeTest {
 

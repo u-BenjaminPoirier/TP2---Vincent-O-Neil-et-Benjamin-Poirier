@@ -29,14 +29,14 @@ public class JeuMemoire implements IJeuMemoire {
 
 
     private String ajouterEspaces(int nbEspaces, String forme) {
+        StringBuilder str = new StringBuilder();
+        str.append(forme);
         int i = 0;
         while (i < nbEspaces) {
-            for (int j = 0; j < nbEspaces; j++) {
-                forme += " ";
-                i++;
-            }
-            return forme;
+            str.append(" ");
+            i++;
         }
+        return str.toString();
     }
 
     private Point choisirForme() {
@@ -47,7 +47,7 @@ public class JeuMemoire implements IJeuMemoire {
             int nbRandomY = getNombreAleatoireEntreBorne(0, LIGNE);
 
             if (!(pointSontPareilles(j, nbRandomX, nbRandomY))) {
-                p.setLocation(nbRandomX,nbRandomY);
+                p.setLocation(nbRandomX, nbRandomY);
                 break;
             }
         }
@@ -92,7 +92,7 @@ public class JeuMemoire implements IJeuMemoire {
     public ArrayList<Point> jouerOrdi() {
 
         for (int i = 0; i < niveau + 2; i++) {
-            VecteurPoints.set(i,choisirForme());
+            VecteurPoints.set(i, choisirForme());
         }
 
         return VecteurPoints;
@@ -121,9 +121,13 @@ public class JeuMemoire implements IJeuMemoire {
      * l'ordi dans l'ordre respecté.
      */
 
-    public boolean jouerHumain(int ligne, int colonne,Forme forme) {
+    public boolean jouerHumain(int ligne, int colonne, Forme forme) {
         return grilleDeJeu[colonne][ligne].equals(forme);
     }
+
+   /* public boolean jouerHumain(int ligne, int colonne) {
+        return grilleDeJeu[colonne][ligne].equals();
+    }*/
 
     public Forme[][] getGrille() {
         return grilleDeJeu;
@@ -153,10 +157,22 @@ public class JeuMemoire implements IJeuMemoire {
 
     @Override
     public String toString() {
-        return "";
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < LIGNE; i++) {
+            for (int j = 0; j < COLONNE; j++) {
+                str.append(ajouterEspaces(17,grilleDeJeu[j][i].toStringCourt()));
+            }
+            str.append("\n");
+        }
+
+        return str.toString();
     }
 
     public static void main(String[] args) {
+        JeuMemoire j = new JeuMemoire();
+
+        System.out.println(j.toString());
 
     }
 

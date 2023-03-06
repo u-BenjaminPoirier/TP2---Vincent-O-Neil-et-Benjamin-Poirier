@@ -1,16 +1,17 @@
 import formes.Couleur;
 import formes.Rectangle;
 import formes.Triangle;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static formes.Couleur.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import formes.Triangle;
 
 import java.util.Objects;
 import java.util.function.DoubleUnaryOperator;
 
-class jFormeTest {
+class FormeTest {
 
     @Test
     void getNom() {

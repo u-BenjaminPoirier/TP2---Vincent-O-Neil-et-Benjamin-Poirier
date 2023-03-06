@@ -4,6 +4,7 @@ import formes.*;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class JeuMemoire implements IJeuMemoire {
 
@@ -47,7 +48,6 @@ public class JeuMemoire implements IJeuMemoire {
         grilleDeJeu = new Forme[COLONNE][LIGNE];
         int index = 0;
 
-
         for (int i = 0; i < COLONNE; i++) {
             for (int j = 0; j < LIGNE ; j++) {
                 grilleDeJeu[i][j] = vecteurFormes.getVecteur().get(index);
@@ -62,23 +62,94 @@ public class JeuMemoire implements IJeuMemoire {
         vecteurFormes.melanger();
     }
 
+
+    /**
+     * L'intelligence du jeu. Génère un tableau de coordonnées (des objets <b>Point(colonne, ligne)</b>)
+     * au hasard. Les points générés doivent être valides dans la grille de jeu.
+     * Le nombre de points générés est en relation avec le niveau courant du jeu.
+     * Il obéit à la règle suivante:
+     * <p>
+     * Le nombre de points générés = niveau courant du jeu + 2
+     *
+     * <b>Il est important qu'un même point ne soit pas choisi 2 fois.</b>
+     * <b>Note</b>: la classe java.awt.Point encapsule un x et un y. Alors que dans le JeuMemoire,
+     * on utilise plutôt colonne et ligne. Ainsi, x correspond à colonne et y à ligne.
+     *
+     * @return la liste des coordonnées <b>Point(colonne, ligne)</b> des formes choisies dans la grille.
+     */
     @Override
     public ArrayList<Point> jouerOrdi() {
-        return null;
+        boolean b = false;
+
+        for (int i = 0; i < niveau + 2; i++) {
+            while (!b){
+                int nbRandomX = getNombreAleatoireEntreBorne(0, COLONNE);
+                int nbRandomY = getNombreAleatoireEntreBorne(0,LIGNE);
+
+                if (!(pointSontPareilles(nbRandomX,nbRandomY))){
+                    b = true;
+                }
+            }
+        }
+
+        return VecteurPoints;
+    }
+
+    public boolean pointSontPareilles(int nbRandomColonne, int  nbRandomLigne){
+        int estPareil = 0;
+
+        for (int i = 0; i < VecteurPoints.size(); i++) {
+            if ( VecteurPoints.get(i).getX() == nbRandomColonne &&  VecteurPoints.get(i).getX() == nbRandomLigne )
+                estPareil +=1;
+        }
+        return (estPareil == 0);
+    }
+
+    public static int getNombreAleatoireEntreBorne(int min, int max) {
+        if (min >= max) {
+            throw new IllegalArgumentException("max doit être plus grand que min");
+        }
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+
+    /**
+     * Valide si la coordonnée jouée par le joueur humain est valide et dans
+     * l'ordre selon les coordonnées générées par l'ordinateur. Voir la méthode
+     * "jouerOrdi()"
+     *
+     * @param ligne   coordonnée ligne de la grille
+     * @param colonne coordonnée colonne dans la grille
+     * @return oui ou non si la coordonnée du joueur est la coordonnée jouée par
+     * l'ordi dans l'ordre respecté.
+     */
+
+    boolean jouerHumain(int ligne, int colonne){
+        int nombreDeCorrecte = 0;
+
+        for (int i = 0; i < niveau + 2; i++) {
+            if (pointSontPareilles(ligne,colonne));
+
+        }
+
+        if (nombreDeCorrecte == niveau+2)
+            return true;
     }
 
     @Override
-    public boolean jouerHumain(int ligne, int colonne, Forme forme) {
+ /*   public boolean jouerHumain(int ligne, int colonne, Forme forme) {
         return grilleDeJeu[ligne][colonne] == forme;
-    }
+    }*/
 
     public Forme[][] getGrille(){
-
+        return grilleDeJeu;
     }
 
     @Override
     public String getNomForme(int ligne, int colonne) {
-        return String.valueOf(grilleDeJeu[ligne][colonne]).strip();
+        Forme f = grilleDeJeu[colonne][ligne];
+
+        return f.getNom() + f.getCouleur();
     }
 
     @Override
@@ -93,10 +164,8 @@ public class JeuMemoire implements IJeuMemoire {
     //set
     @Override
     public void setNiveauPlusUn() {
-
+        niveau ++;
     }
-//ToString et main
-
 
     @Override
     public String toString() {

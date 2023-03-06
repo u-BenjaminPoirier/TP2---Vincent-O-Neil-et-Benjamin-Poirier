@@ -98,7 +98,7 @@ public abstract class Forme {
         else return this.calculerSurface() == forme.calculerSurface();
     }
 
-    public String toStringToCourt(){
-        return getNom() + " " + getCouleur();
+    public String toStringCourt(){
+        return getNom()+ " " + getCouleur();
     }
 }

@@ -35,9 +35,8 @@ public class VecteurFormes implements IVecteurFormes {
      */
     @Override
     public void remplir(int nbrElements) {
-
-        if (nbrElements <= 0) {
-            throw new ArrayIndexOutOfBoundsException();
+        if (!(validerNbrFormes(nbrElements))) {
+            throw new IndexOutOfBoundsException();
         }
 
         Couleur[] listeCouleur = {BLEU, JAUNE, NOIR, ORANGE, ROUGE, VERT,};
@@ -74,16 +73,12 @@ public class VecteurFormes implements IVecteurFormes {
      */
     @Override
     public void trier() {
-        Forme o;
-
         for (int i = 0; i < Vecteur.size(); i++) {
             for (int j = 0; j < Vecteur.size(); j++) {
-                if( 0 < Vecteur.get(j).compareTo(Vecteur.get(j +1))){
-                    o = Vecteur.get(i);
-                    Vecteur.set(i,Vecteur.get(i+1) );
-                    Vecteur.set(i+1, o);
-                }
+                if (0 < Vecteur.get(j).compareTo(Vecteur.get(j + 1)) {
+                    permuter(j, j + 1);
             }
+                }
         }
     }
     /**
@@ -106,22 +101,37 @@ public class VecteurFormes implements IVecteurFormes {
 
 
     private void addForme(Forme forme, Couleur c) {
-            forme.setCouleur(c);
-            Vecteur.add(forme);
+        forme.setCouleur(c);
+        Vecteur.add(forme);
     }
 
-    @Override
+    private void permuter(int index1, int index2) {
+        Forme o1;
+        Forme o2;
+
+        o1 = Vecteur.get(index1);
+        o2 = Vecteur.get(index2);
+
+        Vecteur.remove(index1);
+        Vecteur.add(index1, o2);
+        Vecteur.add(index2, o1);
+        Vecteur.remove(index2);
+
+    }
+
     public String toString() {
         StringBuilder str = new StringBuilder();
         int i = 0;
 
-        while (i < Vecteur.size()){
-            str.append(Vecteur.get(i).toStringToCourt()).append("\n");
-
-            i++;
+        while (i < Vecteur.size()) {
+            str.append(Vecteur.get(i).toStringCourt()).append("\n");
         }
-
+            i++;
 
         return str.toString();
+    }
+
+    private boolean validerNbrFormes(int nbrForme) {
+        return nbrForme > 0;
     }
 }

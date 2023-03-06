@@ -23,11 +23,21 @@ public class JeuMemoire implements IJeuMemoire {
 
     private ArrayList<Point> VecteurPoints;
 
+    /**
+     * Constructeur du jeu Memoire
+     */
     public JeuMemoire() {
         preparerVecteurFormes();
         prepareGrilleDeJeu();
     }
 
+    /**
+     * Methode qui permet d'ajouter des espaces a un String
+     *
+     * @param nbEspaces nombre d'espace a ajouter apres le String
+     * @param forme     String avant les espaces
+     * @return le String et les espaces combines
+     */
 
     private String ajouterEspaces(int nbEspaces, String forme) {
         StringBuilder str = new StringBuilder();
@@ -40,33 +50,47 @@ public class JeuMemoire implements IJeuMemoire {
         return str.toString();
     }
 
+    /**
+     * Methode qui permet de choisir un point aleatoire
+     *
+     * @return un point aleatoire
+     */
     private Point choisirForme() {
         Point p = new Point();
 
         boolean b = true;
-        while (true){
-            int x = getNombreAleatoireEntreBorne(0,COLONNE);
-            int y = getNombreAleatoireEntreBorne(0,LIGNE);
-            if (estLeSeulPointDeLaListe(x,y)){
-                p.setLocation(x,y);
+        while (true) {
+            int x = getNombreAleatoireEntreBorne(0, COLONNE);
+            int y = getNombreAleatoireEntreBorne(0, LIGNE);
+            if (estLeSeulPointDeLaListe(x, y)) {
+                p.setLocation(x, y);
                 break;
             }
         }
         return p;
     }
 
-    private boolean estLeSeulPointDeLaListe(int x,int y){
+    /**
+     * Methode qui permet de verifier si le point aleatoire est dans le Vecteur Point
+     *
+     * @param x Coordonnee colonne du point
+     * @param y Coordonne Ligne du point
+     * @return Vrai si le point est seul dans la liste
+     */
+    private boolean estLeSeulPointDeLaListe(int x, int y) {
         int nombreDeEgualPas = 0;
 
         for (int i = 0; i < VecteurPoints.size(); i++) {
-            if (!(pointSontPareilles(i,x,y))){
-                nombreDeEgualPas ++;
+            if (!(pointSontPareilles(i, x, y))) {
+                nombreDeEgualPas++;
             }
         }
         return nombreDeEgualPas == VecteurPoints.size();
     }
 
-
+    /**
+     * Methode qui prepare la grille de Jeu
+     */
     private void prepareGrilleDeJeu() {
         grilleDeJeu = new Forme[LIGNE][COLONNE];
         int index = 0;
@@ -79,6 +103,9 @@ public class JeuMemoire implements IJeuMemoire {
         }
     }
 
+    /**
+     * Methode qui prepare le Vecteur Forme
+     */
     private void preparerVecteurFormes() {
         vecteurFormes = new VecteurFormes();
         vecteurFormes.remplir(NBR_ELEMENTS_GRILLE);
@@ -110,10 +137,25 @@ public class JeuMemoire implements IJeuMemoire {
         return VecteurPoints;
     }
 
+    /**
+     * Methode qui compare 2 Points, un qui est donne et un qui se trouve dans le VecteurPoint
+     *
+     * @param index index du point qui est compare
+     * @param x     Coordonnee X du point
+     * @param y     Coordonne Y du point
+     * @return Vrai si les 2 points sont pareils
+     */
     public boolean pointSontPareilles(int index, int x, int y) {
         return VecteurPoints.get(index).getX() == x && VecteurPoints.get(index).getY() == y;
     }
 
+    /**
+     * Methode qui cree un nombre aleatoire entre deux bornes
+     *
+     * @param min Le nombre sera plus grand que
+     * @param max Le nombre sera plus petit que
+     * @return un nombre aleatoire entre les deux bornes
+     */
     public static int getNombreAleatoireEntreBorne(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max doit être plus grand que min");
@@ -144,10 +186,22 @@ public class JeuMemoire implements IJeuMemoire {
         return grilleDeJeu[ligne][colonne].equals(forme);
     }
 
+    /**
+     * Methode qui permet d'acceder a la grille
+     *
+     * @return la grille de jeu
+     */
     public Forme[][] getGrille() {
         return grilleDeJeu;
     }
 
+    /**
+     * Methode qui permet d'avoir le nom de la forme et sa couleur sans espaces entre
+     *
+     * @param ligne   coordonnée ligne de la matrice grille
+     * @param colonne coordonnée colonne de la matrice grille
+     * @return une string du nom d'une forme et sa couleur (sans espace)
+     */
     @Override
     public String getNomForme(int ligne, int colonne) {
         Forme f = grilleDeJeu[colonne][ligne];
@@ -155,16 +209,28 @@ public class JeuMemoire implements IJeuMemoire {
         return f.getNom() + f.getCouleur();
     }
 
+    /**
+     * Accesseur du niveau
+     *
+     * @return retourne le niveau
+     */
     @Override
     public int getNiveau() {
         return niveau;
     }
 
+    /**
+     * Accesseur du vecteur Forme
+     *
+     * @return
+     */
     public VecteurFormes getVecteur() {
         return vecteurFormes;
     }
 
-    //set
+    /**
+     * Methode qui permet de monter le niveau de 1
+     */
     @Override
     public void setNiveauPlusUn() {
         niveau++;
@@ -185,10 +251,7 @@ public class JeuMemoire implements IJeuMemoire {
     }
 
     public static void main(String[] args) {
-        JeuMemoire j = new JeuMemoire();
-
-        System.out.println(j.toString());
-
+        ;
     }
 
 }

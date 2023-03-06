@@ -37,11 +37,13 @@ public class VecteurFormes implements IVecteurFormes {
      */
     @Override
     public void remplir(int nbrElements) {
+        Vecteur = new ArrayList<Forme>();
+
         if (!(validerNbrFormes(nbrElements))) {
             throw new IndexOutOfBoundsException();
         }
 
-        Couleur[] listeCouleur = {BLEU, JAUNE, NOIR, ORANGE, ROUGE, VERT,};
+        Couleur[] listeCouleur = {BLEU, JAUNE, NOIR, ORANGE, ROUGE, VERT};
         String formeString = "Triangle";
         int indexCouleur = 0;
 
@@ -49,22 +51,30 @@ public class VecteurFormes implements IVecteurFormes {
             switch (formeString) {
                 case "Triangle" -> {
                     Forme t = new Triangle(1, 1, 1);
-                    t.setCouleur(listeCouleur[indexCouleur]);
-                    Vecteur.add(t);
+
+                    addForme(t,listeCouleur[indexCouleur]);
+
                     formeString = "Rectangle";
                 }
                 case "Rectangle" -> {
                     Forme r = new Rectangle(1, 1);
-                    r.setCouleur(listeCouleur[indexCouleur]);
-                    Vecteur.add(r);
+
+                    addForme(r,listeCouleur[indexCouleur]);
+
                     formeString = "Cercle";
                 }
                 case "Cercle" -> {
-                    Forme c = new Cercle(1);
-                    c.setCouleur(listeCouleur[indexCouleur]);
-                    Vecteur.add(c);
+                    Forme c = new Cercle(2);
+
+                    addForme(c,listeCouleur[indexCouleur]);
+
                     formeString = "Rectangle";
-                    indexCouleur++;
+                    if (indexCouleur == 5) {
+                        indexCouleur = 0;
+                    }
+                    else{
+                        indexCouleur ++;
+                    }
                 }
             }
         }

@@ -13,7 +13,7 @@ public class JeuMemoire implements IJeuMemoire {
 
     private final static int LONGUEUR_CHAINE = 1;
 
-    public final static int NBR_ELEMENTS_GRILLE = 1;
+    public final static int NBR_ELEMENTS_GRILLE = 36;
 
     private Forme[][] grilleDeJeu;
     private int niveau;
@@ -41,27 +41,29 @@ public class JeuMemoire implements IJeuMemoire {
 
     private Point choisirForme() {
         Point p = new Point();
-
-        for (int j = 0; j < VecteurPoints.size(); j++) {
+        boolean b = false;
+        while (b == false) {
             int nbRandomX = getNombreAleatoireEntreBorne(0, COLONNE);
             int nbRandomY = getNombreAleatoireEntreBorne(0, LIGNE);
 
-            if (!(pointSontPareilles(j, nbRandomX, nbRandomY))) {
+            if (!(pointSontPareilles(index, nbRandomX, nbRandomY))) {
                 p.setLocation(nbRandomX, nbRandomY);
                 break;
             }
+
         }
+
 
         return p;
     }
 
 
     private void prepareGrilleDeJeu() {
-        grilleDeJeu = new Forme[COLONNE][LIGNE];
+        grilleDeJeu = new Forme[LIGNE][COLONNE];
         int index = 0;
 
-        for (int i = 0; i < COLONNE; i++) {
-            for (int j = 0; j < LIGNE; j++) {
+        for (int i = 0; i < LIGNE; i++) {
+            for (int j = 0; j < COLONNE; j++) {
                 grilleDeJeu[i][j] = vecteurFormes.getVecteur().get(index);
                 index++;
             }
@@ -70,7 +72,7 @@ public class JeuMemoire implements IJeuMemoire {
 
     private void preparerVecteurFormes() {
         vecteurFormes = new VecteurFormes();
-        vecteurFormes.remplir(20);
+        vecteurFormes.remplir(NBR_ELEMENTS_GRILLE);
         vecteurFormes.melanger();
     }
 
@@ -123,12 +125,14 @@ public class JeuMemoire implements IJeuMemoire {
      */
 
     public boolean jouerHumain(int ligne, int colonne) {
-        Point p = new Point();      
-        p.setLocation(colonne,ligne);
+        Point p = new Point();
+        p.setLocation(colonne, ligne);
 
-        VecteurPoints.add(p);
+        return p.equals(VecteurPoints.get(VecteurPoints.size() - 1));
+    }
 
-        if (pointSontPareilles(lastIndexOf(VecteurFormes),))
+    public boolean jouerHumain(int ligne, int colonne, Forme forme) {
+        return grilleDeJeu[ligne][colonne].equals(forme);
     }
 
     public Forme[][] getGrille() {

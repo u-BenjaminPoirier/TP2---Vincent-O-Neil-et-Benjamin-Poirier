@@ -4,6 +4,7 @@ import formes.*;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Random;
 
 public class JeuMemoire implements IJeuMemoire {
@@ -42,18 +43,27 @@ public class JeuMemoire implements IJeuMemoire {
     private Point choisirForme() {
         Point p = new Point();
 
-        for (int i = 0; i < VecteurPoints.size(); i++) {
-            int nbRandomX = getNombreAleatoireEntreBorne(0, COLONNE);
-            int nbRandomY = getNombreAleatoireEntreBorne(0, LIGNE);
-
-            if (!(pointSontPareilles(i, nbRandomX, nbRandomY))) {
-                p.setLocation(nbRandomX, nbRandomY);
+        boolean b = true;
+        while (true){
+            int x = getNombreAleatoireEntreBorne(0,COLONNE);
+            int y = getNombreAleatoireEntreBorne(0,LIGNE);
+            if (estLeSeulPointDeLaListe(x,y)){
+                p.setLocation(x,y);
                 break;
-            }else{
-                i --;
             }
         }
         return p;
+    }
+
+    private boolean estLeSeulPointDeLaListe(int x,int y){
+        int nombreDeEgualPas = 0;
+
+        for (int i = 0; i < VecteurPoints.size(); i++) {
+            if (!(pointSontPareilles(i,x,y))){
+                nombreDeEgualPas ++;
+            }
+        }
+        return nombreDeEgualPas == VecteurPoints.size();
     }
 
 

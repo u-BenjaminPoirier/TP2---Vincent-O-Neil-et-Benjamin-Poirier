@@ -8,10 +8,10 @@ import java.util.Random;
 
 public class JeuMemoire implements IJeuMemoire {
 
-    public final static int COLONNE = 5;
-    public final static int LIGNE = 4;
+    public final static int COLONNE = 6;
+    public final static int LIGNE = 6;
 
-    private final static int  LONGUEUR_CHAINE = 1;
+    private final static int LONGUEUR_CHAINE = 1;
 
     public final static int NBR_ELEMENTS_GRILLE = 1;
 
@@ -22,7 +22,7 @@ public class JeuMemoire implements IJeuMemoire {
 
     private ArrayList<Point> VecteurPoints;
 
-    public JeuMemoire(){
+    public JeuMemoire() {
         preparerVecteurFormes();
         prepareGrilleDeJeu();
     }
@@ -39,24 +39,36 @@ public class JeuMemoire implements IJeuMemoire {
         }
     }
 
-    private Point choisirForme(){
+    private Point choisirForme() {
+        Point p = new Point();
 
+        for (int j = 0; j < VecteurPoints.size(); j++) {
+            int nbRandomX = getNombreAleatoireEntreBorne(0, COLONNE);
+            int nbRandomY = getNombreAleatoireEntreBorne(0, LIGNE);
+
+            if (!(pointSontPareilles(j, nbRandomX, nbRandomY))) {
+                p.setLocation(nbRandomX,nbRandomY);
+                break;
+            }
+        }
+
+        return p;
     }
 
 
-    private void prepareGrilleDeJeu(){
+    private void prepareGrilleDeJeu() {
         grilleDeJeu = new Forme[COLONNE][LIGNE];
         int index = 0;
 
         for (int i = 0; i < COLONNE; i++) {
-            for (int j = 0; j < LIGNE ; j++) {
+            for (int j = 0; j < LIGNE; j++) {
                 grilleDeJeu[i][j] = vecteurFormes.getVecteur().get(index);
-                index ++;
+                index++;
             }
         }
     }
 
-    private void preparerVecteurFormes(){
+    private void preparerVecteurFormes() {
         vecteurFormes = new VecteurFormes();
         vecteurFormes.remplir(20);
         vecteurFormes.melanger();
@@ -70,7 +82,6 @@ public class JeuMemoire implements IJeuMemoire {
      * Il obéit à la règle suivante:
      * <p>
      * Le nombre de points générés = niveau courant du jeu + 2
-     *
      * <b>Il est important qu'un même point ne soit pas choisi 2 fois.</b>
      * <b>Note</b>: la classe java.awt.Point encapsule un x et un y. Alors que dans le JeuMemoire,
      * on utilise plutôt colonne et ligne. Ainsi, x correspond à colonne et y à ligne.
@@ -79,30 +90,16 @@ public class JeuMemoire implements IJeuMemoire {
      */
     @Override
     public ArrayList<Point> jouerOrdi() {
-        boolean b = false;
 
         for (int i = 0; i < niveau + 2; i++) {
-            while (!b){
-                int nbRandomX = getNombreAleatoireEntreBorne(0, COLONNE);
-                int nbRandomY = getNombreAleatoireEntreBorne(0,LIGNE);
-
-                if (!(pointSontPareilles(nbRandomX,nbRandomY))){
-                    b = true;
-                }
-            }
+            VecteurPoints.set(i,choisirForme());
         }
 
         return VecteurPoints;
     }
 
-    public boolean pointSontPareilles(int nbRandomColonne, int  nbRandomLigne){
-        int estPareil = 0;
-
-        for (int i = 0; i < VecteurPoints.size(); i++) {
-            if ( VecteurPoints.get(i).getX() == nbRandomColonne &&  VecteurPoints.get(i).getX() == nbRandomLigne )
-                estPareil +=1;
-        }
-        return (estPareil == 0);
+    public boolean pointSontPareilles(int index, int x, int y) {
+        return VecteurPoints.get(index).getX() == x && VecteurPoints.get(index).getY() == y;
     }
 
     public static int getNombreAleatoireEntreBorne(int min, int max) {
@@ -124,24 +121,11 @@ public class JeuMemoire implements IJeuMemoire {
      * l'ordi dans l'ordre respecté.
      */
 
-    boolean jouerHumain(int ligne, int colonne){
-        int nombreDeCorrecte = 0;
-
-        for (int i = 0; i < niveau + 2; i++) {
-            if (pointSontPareilles(ligne,colonne));
-
-        }
-
-        if (nombreDeCorrecte == niveau+2)
-            return true;
+    public boolean jouerHumain(int ligne, int colonne,Forme forme) {
+        return grilleDeJeu[colonne][ligne].equals(forme);
     }
 
-    @Override
- /*   public boolean jouerHumain(int ligne, int colonne, Forme forme) {
-        return grilleDeJeu[ligne][colonne] == forme;
-    }*/
-
-    public Forme[][] getGrille(){
+    public Forme[][] getGrille() {
         return grilleDeJeu;
     }
 
@@ -157,14 +141,14 @@ public class JeuMemoire implements IJeuMemoire {
         return niveau;
     }
 
-    public VecteurFormes getVecteur(){
+    public VecteurFormes getVecteur() {
         return vecteurFormes;
     }
 
     //set
     @Override
     public void setNiveauPlusUn() {
-        niveau ++;
+        niveau++;
     }
 
     @Override
